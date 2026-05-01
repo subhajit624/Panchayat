@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-console.log("MONGO URL:", process.env.MONGODB_URL);
-await connectDB();
+
+connectDB();
 
 app.listen(ENV.PORT, () => {
   console.log(`Server is running on port ${ENV.PORT}`);
