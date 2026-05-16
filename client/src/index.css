@@ -1,15 +1,43 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   ROOT — dark theme tokens
+═══════════════════════════════════════════ */
 :root {
-  color: #111111;
-  background: #f4f4f4;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e8e8f0;
+  background: #08080f;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* ── design tokens ── */
+  --bg-base:       #08080f;
+  --bg-surface:    #0f0f1a;
+  --bg-elevated:   #14141f;
+  --bg-subtle:     #1a1a28;
+
+  --border-soft:   rgba(255, 255, 255, 0.07);
+  --border-mid:    rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.20);
+
+  --text-primary:  #f0f0f8;
+  --text-secondary:#a0a0b8;
+  --text-muted:    #606078;
+
+  --indigo:        #6366f1;
+  --indigo-light:  #a5b4fc;
+  --indigo-dim:    rgba(99, 102, 241, 0.12);
+  --emerald:       #10b981;
+  --emerald-light: #34d399;
+  --emerald-dim:   rgba(16, 185, 129, 0.10);
 }
 
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
 * {
   box-sizing: border-box;
 }
@@ -19,8 +47,13 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 246, 246, 0.98) 44%, rgba(238, 238, 238, 0.98) 100%),
-    repeating-linear-gradient(90deg, rgba(17, 17, 17, 0.035) 0 1px, transparent 1px 64px);
+    linear-gradient(180deg, #08080f 0%, #0b0b16 50%, #0e0e1c 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(99, 102, 241, 0.025) 0 1px,
+      transparent 1px 72px
+    );
+  color: var(--text-primary);
 }
 
 button,
@@ -30,94 +63,74 @@ select {
   font: inherit;
 }
 
-button {
-  cursor: pointer;
-}
+button          { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
 
-button:disabled {
-  cursor: not-allowed;
-}
-
-.app-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.app-scrollbar::-webkit-scrollbar-track {
-  background: #f2f2f2;
-}
-
-.app-scrollbar::-webkit-scrollbar-thumb {
-  background: #c8c8c8;
-  border: 2px solid #f2f2f2;
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════ */
+.app-scrollbar::-webkit-scrollbar        { width: 10px; height: 10px; }
+.app-scrollbar::-webkit-scrollbar-track  { background: #0f0f1a; }
+.app-scrollbar::-webkit-scrollbar-thumb  {
+  background: #2a2a40;
+  border: 2px solid #0f0f1a;
   border-radius: 999px;
 }
+.app-scrollbar::-webkit-scrollbar-thumb:hover { background: #3a3a58; }
 
+/* ═══════════════════════════════════════════
+   FIELD  (inputs, selects, textareas)
+═══════════════════════════════════════════ */
 .field {
   width: 100%;
-  border: 1px solid #d8d8d8;
-  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border-mid);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 8px;
   padding: 0.75rem 0.875rem;
-  color: #111111;
+  color: var(--text-primary);
   outline: none;
-  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-
+.field::placeholder { color: var(--text-muted); }
 .field:focus {
-  border-color: #111111;
-  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.08), 0 10px 24px rgba(17, 17, 17, 0.07);
+  border-color: var(--indigo);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.18),
+    0 8px 24px rgba(99, 102, 241, 0.10);
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
 }
 
+/* ═══════════════════════════════════════════
+   SURFACE  (cards, panels)
+═══════════════════════════════════════════ */
 .surface {
-  border: 1px solid rgba(17, 17, 17, 0.1);
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 8px;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 32px rgba(0, 0, 0, 0.30);
   backdrop-filter: blur(16px);
 }
 
-.focus-ring {
-  outline: none;
-}
-
+/* ═══════════════════════════════════════════
+   FOCUS RING
+═══════════════════════════════════════════ */
+.focus-ring { outline: none; }
 .focus-ring:focus-visible {
-  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.18);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.40);
 }
 
+/* ═══════════════════════════════════════════
+   ENTRANCE ANIMATIONS
+═══════════════════════════════════════════ */
 .animate-rise {
   animation: rise-in 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-
 .animate-fade {
   animation: fade-in 420ms ease both;
-}
-
-.animated-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.shine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.24), transparent 80%);
-  transform: translateX(-120%);
-  transition: transform 700ms ease;
-}
-
-.shine:hover::after {
-  transform: translateX(120%);
 }
 
 @keyframes rise-in {
@@ -130,12 +143,42 @@ button:disabled {
     transform: translateY(0) scale(1);
   }
 }
-
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATED GRID OVERLAY
+   (used inside dark hero sections)
+═══════════════════════════════════════════ */
+.animated-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ═══════════════════════════════════════════
+   SHINE  (sweep-glint on hover)
+═══════════════════════════════════════════ */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.06),
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 700ms ease;
+}
+.shine:hover::after {
+  transform: translateX(120%);
 }
