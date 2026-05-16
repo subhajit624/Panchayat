@@ -4,19 +4,28 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "start": "node app.js",
     "test": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seed:admin": "node scripts/createAdmin.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@langchain/core": "^0.3.58",
+    "@langchain/google-genai": "^0.2.18",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-validator": "^7.3.1",
     "json-web-token": "^3.2.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.6.1",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "socket.io": "^4.8.1"
   }
 }
